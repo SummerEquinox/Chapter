@@ -29,11 +29,15 @@ The largest unit of Chapter is a 'Chapter' which is responsible for wrapping the
 
 The smaller unit is known as a 'Sequence'. A sequence is responsible for executing its personal 'Content' and then calling its 'Successor' - so, the obvious limitation is the call-stack, keep that in mind when programming with this framework.
 
+For everything to work properly, please ensure that both `Sequence.luau` and `Chapter.luau` are located at the same directory level (this is because Chapter assumes that Sequence exists at `..\Sequence`).
+
 -----
 ### Chapters
 A chapter is constructed using `Chapter.new()`. It takes no parameters and returns the results of its pcall.
 ```lua
-...
+type Chapter = typeof(setmetatable({}::{
+    FirstSequence: Sequence.Sequence?
+}, Chapter))
 ```
 
 -----
@@ -41,7 +45,7 @@ A chapter is constructed using `Chapter.new()`. It takes no parameters and retur
 A sequence is constructed using `Sequence.new()`.
 ```lua
 -- Sequence type
-export type Sequence = typeof(setmetatable({}::{
+type Sequence = typeof(setmetatable({}::{
     Content: (()->nil)?,
     Successor: Sequence?,
 }, Sequence))

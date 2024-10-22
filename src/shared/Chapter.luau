@@ -7,3 +7,47 @@
 
 --!strict
 
+-- Require sequence module \
+local Sequence = require(script.Parent.Sequence)
+
+-- Chapter object \
+local Chapter = {}
+Chapter.__index = Chapter
+
+-- Chapter type \
+type Chapter = typeof(setmetatable({}::{
+    FirstSequence: Sequence.Sequence?
+}, Chapter))
+
+-- Chapter constructor function \
+function Chapter.new(): Chapter
+    local self = {}
+    setmetatable(self, Chapter)
+
+    self.FirstSequence = nil
+
+    return self
+end
+
+-- Methods \
+function Chapter:RegisterFirstSequence(FirstSequence: Sequence.Sequence)
+    if not FirstSequence then
+        warn "Please submit a valid sequence as the first Chapter sequence."
+        return
+    end
+
+    self.FirstSequence = FirstSequence
+end
+
+function Chapter:Play()
+    if not self.FirstSequence then
+        warn "Please register the first sequence before attempting to play the Chapter."
+        return
+    end
+
+    self.FirstSequence:Play()
+    print("A chapter was completed.")
+end
+
+-- Chapter return statement \
+return Chapter
