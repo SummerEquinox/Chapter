@@ -50,9 +50,39 @@ type Sequence = typeof(setmetatable({}::{
     Successor: Sequence?,
 }, Sequence))
 ```
-----
+-----
 ### Example implementation for a small 'story game'.
 The following is an example of implementing the chapter/sequence framework.
 ```lua
-...
+local Scenes = require(\scenesModuleLocation)
+local MainChapter = Chapter.new()
+
+local FormerScene = nil
+for Scene in Scenes do
+    -- Populate the chapter.
+
+    if not FormerScene then
+        FormerScene = Sequence.new()
+        Sequence.Content = Scene
+        MainChapter:RegisterFirstSequence(FormerScene)
+        continue
+    end
+
+    local Temp = Sequence.new()
+    Temp.Content = Scene
+    FormerScene.Successor = Temp
+    FormerScene = Temp
+end
+
+local _, ChapterError = Chapter:Play()
+if not ChapterError then
+    print('Story completed!')
+end
 ```
+-----
+### Server-sided architecture recommendations.
+Chapter is great for organizing successive sections of a game in a changeable and readable way. I tend to limit myself to things can actually be considered part of a deeply successive program, this is most useful for story games.
+
+-----
+### Client-sided architecture recommendations
+Chapter can be used on the client side of your game as well - it is functional in the exact same way, so it could be used for cutscenes and other things. I would personally recommend related information (like has every player seen a cutscene) be applied through RemoteFunction, that way the server can proceed once everyone has completed or timed out their personal remote requests with no problem to the server itself.
