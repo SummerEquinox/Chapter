@@ -7,3 +7,17 @@
 
 --!strict
 
+-- Require sequence module \
+local Sequence = require(script.Parent.Sequence)
+
+-- Chapter object \
+local Chapter = {}
+Chapter.__index = Chapter
+
+-- Chapter type \
+type Chapter = typeof(setmetatable({}::{
+    FirstSequence: Sequence.Sequence?
+}, Chapter))
+
+-- Chapter return statement
+return Chapter
