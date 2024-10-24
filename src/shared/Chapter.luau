@@ -45,8 +45,10 @@ function Chapter:Play()
         return
     end
 
-    self.FirstSequence:Play()
-    print("A chapter was completed.")
+    local s,e = pcall(function()
+        self.FirstSequence:Play()
+    end)
+    return s,e
 end
 
 -- Chapter return statement \

@@ -36,7 +36,7 @@ function Sequence:Play()
 
     self.Content()
     if self.Successor then
-        self.Successor()
+        self.Successor:Play()
     end
 end
 
