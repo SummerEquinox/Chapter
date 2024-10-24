@@ -44,7 +44,6 @@ type Chapter = typeof(setmetatable({}::{
 ### Sequence
 A sequence is constructed using `Sequence.new()`.
 ```lua
--- Sequence type
 type Sequence = typeof(setmetatable({}::{
     Content: (()->nil)?,
     Successor: Sequence?,
