@@ -32,7 +32,7 @@ The smaller unit is known as a 'Sequence'. A sequence is responsible for executi
 For everything to work properly, please ensure that both `Sequence.luau` and `Chapter.luau` are located at the same directory level (this is because Chapter assumes that Sequence exists at `..\Sequence`).
 
 -----
-### Chapters
+### Chapter
 A chapter is constructed using `Chapter.new()`. It takes no parameters and returns the results of its pcall.
 ```lua
 type Chapter = typeof(setmetatable({}::{
@@ -58,7 +58,7 @@ local Scenes = require(\scenesModuleLocation)
 local MainChapter = Chapter.new()
 
 local FormerScene = nil
-for Scene in Scenes do
+for _, Scene in Scenes do
     -- Populate the chapter.
 
     if not FormerScene then
@@ -80,7 +80,7 @@ if not ChapterError then
 end
 ```
 -----
-### Server-sided architecture recommendations.
+### Server-sided architecture recommendations
 Chapter is great for organizing successive sections of a game in a changeable and readable way. I tend to limit myself to things can actually be considered part of a deeply successive program, this is most useful for story games.
 
 -----
