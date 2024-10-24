@@ -1095,7 +1095,37 @@ type Chapter = typeof(setmetatable({}::{
     FirstSequence: Sequence.Sequence?
 }, Chapter))
 
+-- Chapter constructor function \
+function Chapter.new(): Chapter
+    local self = {}
+    setmetatable(self, Chapter)
 
+    self.FirstSequence = nil
+
+    return self
+end
+
+-- Methods \
+function Chapter:RegisterFirstSequence(FirstSequence: Sequence.Sequence)
+    if not FirstSequence then
+        warn "Please submit a valid sequence as the first Chapter sequence."
+        return
+    end
+
+    self.FirstSequence = FirstSequence
+end
+
+function Chapter:Play()
+    if not self.FirstSequence then
+        warn "Please register the first sequence before attempting to play the Chapter."
+        return
+    end
+
+    local s,e = pcall(function()
+        self.FirstSequence:Play()
+    end)
+    return s,e
+end
 
 -- Chapter return statement \
 return Chapter]]></ProtectedString>
@@ -1151,7 +1181,7 @@ function Sequence:Play()
 
     self.Content()
     if self.Successor then
-        self.Successor()
+        self.Successor:Play()
     end
 end
 
@@ -1174,7 +1204,7 @@ return Sequence]]></ProtectedString>
 				<BinaryString name="Tags"></BinaryString>
 				<UniqueId name="UniqueId">5f5c22cbbc3d3aa207274dd8000005f9</UniqueId>
 			</Properties>
-			<Item class="Folder" referent="RBX91E2F4B4F9114854A170D22D0C11A67F">
+			<Item class="Folder" referent="RBX84DC65037F1C4F108EDB5D89EC4108C3">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -1183,9 +1213,9 @@ return Sequence]]></ProtectedString>
 					<string name="Name">Modules</string>
 					<int64 name="SourceAssetId">-1</int64>
 					<BinaryString name="Tags"></BinaryString>
-					<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005ee</UniqueId>
+					<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005ee</UniqueId>
 				</Properties>
-				<Item class="ModuleScript" referent="RBX309DBAD8FF204821BAE10C3AA0597E63">
+				<Item class="ModuleScript" referent="RBXBBA9C5067C5543409574681F56834DA1">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -1353,9 +1383,9 @@ return module
 ]]></ProtectedString>
 						<int64 name="SourceAssetId">-1</int64>
 						<BinaryString name="Tags"></BinaryString>
-						<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005f1</UniqueId>
+						<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005f1</UniqueId>
 					</Properties>
-					<Item class="Frame" referent="RBXC08F23778EB14674893248715A41E5D0">
+					<Item class="Frame" referent="RBX23272706DA3D43B6AF2FB1DD82111270">
 						<Properties>
 							<bool name="Active">true</bool>
 							<Vector2 name="AnchorPoint">
@@ -1416,11 +1446,11 @@ return module
 							<int64 name="SourceAssetId">-1</int64>
 							<token name="Style">0</token>
 							<BinaryString name="Tags"></BinaryString>
-							<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005f2</UniqueId>
+							<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005f2</UniqueId>
 							<bool name="Visible">true</bool>
 							<int name="ZIndex">1</int>
 						</Properties>
-						<Item class="Frame" referent="RBX5EF69712ECDD485BA721F43C1D39DF6B">
+						<Item class="Frame" referent="RBX2860B53D02BD44F68420932B6249F01F">
 							<Properties>
 								<bool name="Active">false</bool>
 								<Vector2 name="AnchorPoint">
@@ -1481,11 +1511,11 @@ return module
 								<int64 name="SourceAssetId">-1</int64>
 								<token name="Style">0</token>
 								<BinaryString name="Tags"></BinaryString>
-								<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005f3</UniqueId>
+								<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005f3</UniqueId>
 								<bool name="Visible">true</bool>
 								<int name="ZIndex">1</int>
 							</Properties>
-							<Item class="Frame" referent="RBX549F950B3D4445FB847F21BA25362D90">
+							<Item class="Frame" referent="RBXCACB465AF1474EFBB24AF1E893AED5FF">
 								<Properties>
 									<bool name="Active">false</bool>
 									<Vector2 name="AnchorPoint">
@@ -1546,11 +1576,11 @@ return module
 									<int64 name="SourceAssetId">-1</int64>
 									<token name="Style">0</token>
 									<BinaryString name="Tags"></BinaryString>
-									<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005f4</UniqueId>
+									<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005f4</UniqueId>
 									<bool name="Visible">true</bool>
 									<int name="ZIndex">2</int>
 								</Properties>
-								<Item class="UIStroke" referent="RBXFE7020D5F53948508624BAF583F489BA">
+								<Item class="UIStroke" referent="RBX3CABB03B8789495B9D57C660B19A7D7C">
 									<Properties>
 										<token name="ApplyStrokeMode">0</token>
 										<BinaryString name="AttributesSerialize"></BinaryString>
@@ -1569,10 +1599,10 @@ return module
 										<BinaryString name="Tags"></BinaryString>
 										<float name="Thickness">1</float>
 										<float name="Transparency">0</float>
-										<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005f5</UniqueId>
+										<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005f5</UniqueId>
 									</Properties>
 								</Item>
-								<Item class="UICorner" referent="RBX871BB97B09914E959806E07B98E8B094">
+								<Item class="UICorner" referent="RBX5C0E3BEB82FC417D9BE214A26EE02FA0">
 									<Properties>
 										<BinaryString name="AttributesSerialize"></BinaryString>
 										<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -1585,11 +1615,11 @@ return module
 										<string name="Name">UICorner</string>
 										<int64 name="SourceAssetId">-1</int64>
 										<BinaryString name="Tags"></BinaryString>
-										<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005f6</UniqueId>
+										<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005f6</UniqueId>
 									</Properties>
 								</Item>
 							</Item>
-							<Item class="CanvasGroup" referent="RBXBB6401ECD8C94EB89670044F46C168F1">
+							<Item class="CanvasGroup" referent="RBX5343760A159A4B2595C52A7DE915931B">
 								<Properties>
 									<bool name="Active">false</bool>
 									<Vector2 name="AnchorPoint">
@@ -1656,11 +1686,11 @@ return module
 									<token name="SizeConstraint">0</token>
 									<int64 name="SourceAssetId">-1</int64>
 									<BinaryString name="Tags"></BinaryString>
-									<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005f7</UniqueId>
+									<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005f7</UniqueId>
 									<bool name="Visible">true</bool>
 									<int name="ZIndex">1</int>
 								</Properties>
-								<Item class="UIGradient" referent="RBXDC8DDF059EE9467E94B9669769F6F04D">
+								<Item class="UIGradient" referent="RBXC3F1B3A0D6F248F8888236E530E84337">
 									<Properties>
 										<BinaryString name="AttributesSerialize"></BinaryString>
 										<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -1677,10 +1707,10 @@ return module
 										<int64 name="SourceAssetId">-1</int64>
 										<BinaryString name="Tags"></BinaryString>
 										<NumberSequence name="Transparency">0 0 0 1 0 0 </NumberSequence>
-										<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005f8</UniqueId>
+										<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005f8</UniqueId>
 									</Properties>
 								</Item>
-								<Item class="CanvasGroup" referent="RBX7858B00A76B6493FBC339409C2E555E1">
+								<Item class="CanvasGroup" referent="RBX7A4EA71A685A4F92933DD208DF6C2811">
 									<Properties>
 										<bool name="Active">false</bool>
 										<Vector2 name="AnchorPoint">
@@ -1747,11 +1777,11 @@ return module
 										<token name="SizeConstraint">0</token>
 										<int64 name="SourceAssetId">-1</int64>
 										<BinaryString name="Tags"></BinaryString>
-										<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005f9</UniqueId>
+										<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005f9</UniqueId>
 										<bool name="Visible">true</bool>
 										<int name="ZIndex">1</int>
 									</Properties>
-									<Item class="UIGradient" referent="RBX7F9815671DF3476D8D532277F17536AB">
+									<Item class="UIGradient" referent="RBX93336A3256EF4E56BC8639F0D9479C3F">
 										<Properties>
 											<BinaryString name="AttributesSerialize"></BinaryString>
 											<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -1768,10 +1798,10 @@ return module
 											<int64 name="SourceAssetId">-1</int64>
 											<BinaryString name="Tags"></BinaryString>
 											<NumberSequence name="Transparency">0 0 0 1 0 0 </NumberSequence>
-											<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005fa</UniqueId>
+											<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005fa</UniqueId>
 										</Properties>
 									</Item>
-									<Item class="Frame" referent="RBXF6D50F8229364CDC85C49F9501891061">
+									<Item class="Frame" referent="RBXC341AF9E846A44208B1BC9E2ABC0FF03">
 										<Properties>
 											<bool name="Active">false</bool>
 											<Vector2 name="AnchorPoint">
@@ -1832,11 +1862,11 @@ return module
 											<int64 name="SourceAssetId">-1</int64>
 											<token name="Style">0</token>
 											<BinaryString name="Tags"></BinaryString>
-											<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005fb</UniqueId>
+											<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005fb</UniqueId>
 											<bool name="Visible">true</bool>
 											<int name="ZIndex">1</int>
 										</Properties>
-										<Item class="UICorner" referent="RBXFC007D1185C94A1391CCA76143D765FF">
+										<Item class="UICorner" referent="RBX41750A6BA2C34DE7A972F4D92FA924EE">
 											<Properties>
 												<BinaryString name="AttributesSerialize"></BinaryString>
 												<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -1849,10 +1879,10 @@ return module
 												<string name="Name">UICorner</string>
 												<int64 name="SourceAssetId">-1</int64>
 												<BinaryString name="Tags"></BinaryString>
-												<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005fc</UniqueId>
+												<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005fc</UniqueId>
 											</Properties>
 										</Item>
-										<Item class="UIStroke" referent="RBX514C87AFD8D94B179FCC50D8AC8F91D6">
+										<Item class="UIStroke" referent="RBX982B1CFEFC924B3AA27B9A98A5714161">
 											<Properties>
 												<token name="ApplyStrokeMode">1</token>
 												<BinaryString name="AttributesSerialize"></BinaryString>
@@ -1871,9 +1901,9 @@ return module
 												<BinaryString name="Tags"></BinaryString>
 												<float name="Thickness">4</float>
 												<float name="Transparency">0</float>
-												<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005fd</UniqueId>
+												<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005fd</UniqueId>
 											</Properties>
-											<Item class="UIGradient" referent="RBX23156E00A85B4AECADA12B3A0FCD92B7">
+											<Item class="UIGradient" referent="RBXD1B1B982353148C3A24CAA52D8CA6B4B">
 												<Properties>
 													<BinaryString name="AttributesSerialize"></BinaryString>
 													<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -1890,7 +1920,7 @@ return module
 													<int64 name="SourceAssetId">-1</int64>
 													<BinaryString name="Tags"></BinaryString>
 													<NumberSequence name="Transparency">0 0 0 1 0 0 </NumberSequence>
-													<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005fe</UniqueId>
+													<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005fe</UniqueId>
 												</Properties>
 											</Item>
 										</Item>
@@ -1898,7 +1928,7 @@ return module
 								</Item>
 							</Item>
 						</Item>
-						<Item class="Frame" referent="RBXB3E8E8BFE2594798B32CE776E7DE3356">
+						<Item class="Frame" referent="RBX9829CA8C35CA4410ACCA7E46DD5004ED">
 							<Properties>
 								<bool name="Active">false</bool>
 								<Vector2 name="AnchorPoint">
@@ -1959,11 +1989,11 @@ return module
 								<int64 name="SourceAssetId">-1</int64>
 								<token name="Style">0</token>
 								<BinaryString name="Tags"></BinaryString>
-								<UniqueId name="UniqueId">1c5af6af6d1a60b507288a62000005ff</UniqueId>
+								<UniqueId name="UniqueId">590a0016c53e1d020729c36f000005ff</UniqueId>
 								<bool name="Visible">true</bool>
 								<int name="ZIndex">2</int>
 							</Properties>
-							<Item class="UIStroke" referent="RBXE1A7121CF3ED4A45900FF6EB30DD31BE">
+							<Item class="UIStroke" referent="RBX5B1BE6EC3EF24095B9C87696401F800E">
 								<Properties>
 									<token name="ApplyStrokeMode">0</token>
 									<BinaryString name="AttributesSerialize"></BinaryString>
@@ -1982,10 +2012,10 @@ return module
 									<BinaryString name="Tags"></BinaryString>
 									<float name="Thickness">1</float>
 									<float name="Transparency">0.5</float>
-									<UniqueId name="UniqueId">1c5af6af6d1a60b507288a6200000600</UniqueId>
+									<UniqueId name="UniqueId">590a0016c53e1d020729c36f00000600</UniqueId>
 								</Properties>
 							</Item>
-							<Item class="UICorner" referent="RBX2A5341BEEA1B46A9B60B6B63BB37CD42">
+							<Item class="UICorner" referent="RBXC1C17C691A4D45368E06B742A23ED5AB">
 								<Properties>
 									<BinaryString name="AttributesSerialize"></BinaryString>
 									<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -1998,12 +2028,12 @@ return module
 									<string name="Name">UICorner</string>
 									<int64 name="SourceAssetId">-1</int64>
 									<BinaryString name="Tags"></BinaryString>
-									<UniqueId name="UniqueId">1c5af6af6d1a60b507288a6200000601</UniqueId>
+									<UniqueId name="UniqueId">590a0016c53e1d020729c36f00000601</UniqueId>
 								</Properties>
 							</Item>
 						</Item>
 					</Item>
-					<Item class="Frame" referent="RBXE24147857BDC4A4AB85D438A3C5649CB">
+					<Item class="Frame" referent="RBX830F29EEAB414918BEE7EAC36C3DE47A">
 						<Properties>
 							<bool name="Active">true</bool>
 							<Vector2 name="AnchorPoint">
@@ -2064,11 +2094,11 @@ return module
 							<int64 name="SourceAssetId">-1</int64>
 							<token name="Style">0</token>
 							<BinaryString name="Tags"></BinaryString>
-							<UniqueId name="UniqueId">1c5af6af6d1a60b507288a6200000602</UniqueId>
+							<UniqueId name="UniqueId">590a0016c53e1d020729c36f00000602</UniqueId>
 							<bool name="Visible">true</bool>
 							<int name="ZIndex">1</int>
 						</Properties>
-						<Item class="Frame" referent="RBX6C1F4DC5C6634B8DBF6A419E5490B607">
+						<Item class="Frame" referent="RBX3A85726A39CA4C8E969EC404BA6BFA85">
 							<Properties>
 								<bool name="Active">false</bool>
 								<Vector2 name="AnchorPoint">
@@ -2129,11 +2159,11 @@ return module
 								<int64 name="SourceAssetId">-1</int64>
 								<token name="Style">0</token>
 								<BinaryString name="Tags"></BinaryString>
-								<UniqueId name="UniqueId">1c5af6af6d1a60b507288a6200000603</UniqueId>
+								<UniqueId name="UniqueId">590a0016c53e1d020729c36f00000603</UniqueId>
 								<bool name="Visible">true</bool>
 								<int name="ZIndex">1</int>
 							</Properties>
-							<Item class="Frame" referent="RBXE4D470FD6E1147C5ACBB2AF990161095">
+							<Item class="Frame" referent="RBXD560C6A454094F1CA6093A5F9C5DD2A8">
 								<Properties>
 									<bool name="Active">false</bool>
 									<Vector2 name="AnchorPoint">
@@ -2194,11 +2224,11 @@ return module
 									<int64 name="SourceAssetId">-1</int64>
 									<token name="Style">0</token>
 									<BinaryString name="Tags"></BinaryString>
-									<UniqueId name="UniqueId">1c5af6af6d1a60b507288a6200000604</UniqueId>
+									<UniqueId name="UniqueId">590a0016c53e1d020729c36f00000604</UniqueId>
 									<bool name="Visible">true</bool>
 									<int name="ZIndex">2</int>
 								</Properties>
-								<Item class="UIStroke" referent="RBX8F1946DD92734695B1FE38D310E5CF75">
+								<Item class="UIStroke" referent="RBX671A28BE44FB4B58A23827458D48773F">
 									<Properties>
 										<token name="ApplyStrokeMode">0</token>
 										<BinaryString name="AttributesSerialize"></BinaryString>
@@ -2217,10 +2247,10 @@ return module
 										<BinaryString name="Tags"></BinaryString>
 										<float name="Thickness">1</float>
 										<float name="Transparency">0</float>
-										<UniqueId name="UniqueId">1c5af6af6d1a60b507288a6200000605</UniqueId>
+										<UniqueId name="UniqueId">590a0016c53e1d020729c36f00000605</UniqueId>
 									</Properties>
 								</Item>
-								<Item class="UICorner" referent="RBXD7E0E60F4AEA45788B3F222DBB890361">
+								<Item class="UICorner" referent="RBXE38276EDE0CE479582D27F466B625AE2">
 									<Properties>
 										<BinaryString name="AttributesSerialize"></BinaryString>
 										<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -2233,11 +2263,11 @@ return module
 										<string name="Name">UICorner</string>
 										<int64 name="SourceAssetId">-1</int64>
 										<BinaryString name="Tags"></BinaryString>
-										<UniqueId name="UniqueId">1c5af6af6d1a60b507288a6200000606</UniqueId>
+										<UniqueId name="UniqueId">590a0016c53e1d020729c36f00000606</UniqueId>
 									</Properties>
 								</Item>
 							</Item>
-							<Item class="Frame" referent="RBXAECFCF8076D14D46819716B32EFB699A">
+							<Item class="Frame" referent="RBX4B98453FEA49420EB9BDEF9FA60E2C2E">
 								<Properties>
 									<bool name="Active">false</bool>
 									<Vector2 name="AnchorPoint">
@@ -2298,11 +2328,11 @@ return module
 									<int64 name="SourceAssetId">-1</int64>
 									<token name="Style">0</token>
 									<BinaryString name="Tags"></BinaryString>
-									<UniqueId name="UniqueId">1c5af6af6d1a60b507288a6200000607</UniqueId>
+									<UniqueId name="UniqueId">590a0016c53e1d020729c36f00000607</UniqueId>
 									<bool name="Visible">true</bool>
 									<int name="ZIndex">1</int>
 								</Properties>
-								<Item class="UICorner" referent="RBX4DCD64C0A58B4EC3B029A718BF6CA026">
+								<Item class="UICorner" referent="RBXE1E6346DFAB44C7DBA61A270C392358E">
 									<Properties>
 										<BinaryString name="AttributesSerialize"></BinaryString>
 										<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -2315,10 +2345,10 @@ return module
 										<string name="Name">UICorner</string>
 										<int64 name="SourceAssetId">-1</int64>
 										<BinaryString name="Tags"></BinaryString>
-										<UniqueId name="UniqueId">1c5af6af6d1a60b507288a6200000608</UniqueId>
+										<UniqueId name="UniqueId">590a0016c53e1d020729c36f00000608</UniqueId>
 									</Properties>
 								</Item>
-								<Item class="UIStroke" referent="RBX9A0DD0D81AF74B89AD527A64CB8EC391">
+								<Item class="UIStroke" referent="RBX748F2164CD394344A6FB8D91DF99DED0">
 									<Properties>
 										<token name="ApplyStrokeMode">1</token>
 										<BinaryString name="AttributesSerialize"></BinaryString>
@@ -2337,9 +2367,9 @@ return module
 										<BinaryString name="Tags"></BinaryString>
 										<float name="Thickness">4</float>
 										<float name="Transparency">0</float>
-										<UniqueId name="UniqueId">1c5af6af6d1a60b507288a6200000609</UniqueId>
+										<UniqueId name="UniqueId">590a0016c53e1d020729c36f00000609</UniqueId>
 									</Properties>
-									<Item class="UIGradient" referent="RBX9227BA506E4F4203881C8F73F4BD96AC">
+									<Item class="UIGradient" referent="RBXFBF1714D132F4E7290F2D4766538D4CE">
 										<Properties>
 											<BinaryString name="AttributesSerialize"></BinaryString>
 											<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -2356,13 +2386,13 @@ return module
 											<int64 name="SourceAssetId">-1</int64>
 											<BinaryString name="Tags"></BinaryString>
 											<NumberSequence name="Transparency">0 0 0 1 0 0 </NumberSequence>
-											<UniqueId name="UniqueId">1c5af6af6d1a60b507288a620000060a</UniqueId>
+											<UniqueId name="UniqueId">590a0016c53e1d020729c36f0000060a</UniqueId>
 										</Properties>
 									</Item>
 								</Item>
 							</Item>
 						</Item>
-						<Item class="Frame" referent="RBXA2382CD6505D48478BB6CC7ED7D398C5">
+						<Item class="Frame" referent="RBX73650D19679B4C5381C9ABEE8B6D8D7A">
 							<Properties>
 								<bool name="Active">false</bool>
 								<Vector2 name="AnchorPoint">
@@ -2423,11 +2453,11 @@ return module
 								<int64 name="SourceAssetId">-1</int64>
 								<token name="Style">0</token>
 								<BinaryString name="Tags"></BinaryString>
-								<UniqueId name="UniqueId">1c5af6af6d1a60b507288a620000060b</UniqueId>
+								<UniqueId name="UniqueId">590a0016c53e1d020729c36f0000060b</UniqueId>
 								<bool name="Visible">true</bool>
 								<int name="ZIndex">2</int>
 							</Properties>
-							<Item class="UIStroke" referent="RBX58F3297BFAEF45748210A50556BE57AA">
+							<Item class="UIStroke" referent="RBXEE44012FB4E34526AB7888E99F7AEA70">
 								<Properties>
 									<token name="ApplyStrokeMode">0</token>
 									<BinaryString name="AttributesSerialize"></BinaryString>
@@ -2446,10 +2476,10 @@ return module
 									<BinaryString name="Tags"></BinaryString>
 									<float name="Thickness">1</float>
 									<float name="Transparency">0.5</float>
-									<UniqueId name="UniqueId">1c5af6af6d1a60b507288a620000060c</UniqueId>
+									<UniqueId name="UniqueId">590a0016c53e1d020729c36f0000060c</UniqueId>
 								</Properties>
 							</Item>
-							<Item class="UICorner" referent="RBXB091DA0732054EDAB6F0EE7FCAD7D282">
+							<Item class="UICorner" referent="RBX93E9CEB76AF945AF88AAABCE3AD89536">
 								<Properties>
 									<BinaryString name="AttributesSerialize"></BinaryString>
 									<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -2462,13 +2492,13 @@ return module
 									<string name="Name">UICorner</string>
 									<int64 name="SourceAssetId">-1</int64>
 									<BinaryString name="Tags"></BinaryString>
-									<UniqueId name="UniqueId">1c5af6af6d1a60b507288a620000060d</UniqueId>
+									<UniqueId name="UniqueId">590a0016c53e1d020729c36f0000060d</UniqueId>
 								</Properties>
 							</Item>
 						</Item>
 					</Item>
 				</Item>
-				<Item class="ModuleScript" referent="RBXBC98DA46067C4803AFF1BA8D82161896">
+				<Item class="ModuleScript" referent="RBX7F52EB302A57404E898EBBFF4BCDA0C4">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -2689,9 +2719,9 @@ return module
 ]]></ProtectedString>
 						<int64 name="SourceAssetId">-1</int64>
 						<BinaryString name="Tags"></BinaryString>
-						<UniqueId name="UniqueId">1c5af6af6d1a60b507288a620000060f</UniqueId>
+						<UniqueId name="UniqueId">590a0016c53e1d020729c36f0000060f</UniqueId>
 					</Properties>
-					<Item class="ObjectValue" referent="RBXECBC74EB2EAF4DEABE4D6906977AFE02">
+					<Item class="ObjectValue" referent="RBX60EC7B3046544A2A8EA3836C82C3722C">
 						<Properties>
 							<BinaryString name="AttributesSerialize"><![CDATA[BgAAAAUAAABBbmdsZQUAAAAACwAAAEpvaW50T2Zmc2V0CgAAAAAAAAAAAAAAAAAAAAAKAAAA
 TGltYk9mZnNldAoAAAAAAAAAAAAAAAAAAAAACAAAAFJpZ0pvaW50AwEJAAAAVHJhbnNmb3Jt
@@ -2702,12 +2732,12 @@ CgAAAAAAAAAAAAAAAAAAAAAOAAAAVHJhbnNmb3JtQW5nbGUFAAAAAA==]]></BinaryString>
 							<string name="Name">RigJoint</string>
 							<int64 name="SourceAssetId">-1</int64>
 							<BinaryString name="Tags"></BinaryString>
-							<UniqueId name="UniqueId">1c5af6af6d1a60b507288a6200000610</UniqueId>
+							<UniqueId name="UniqueId">590a0016c53e1d020729c36f00000610</UniqueId>
 							<Ref name="Value">null</Ref>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="ModuleScript" referent="RBX9645F4E850E64D7CAA4A75C32EB00626">
+				<Item class="ModuleScript" referent="RBX339A4197EDB94137B99A8C4B3FDFBC28">
 					<Properties>
 						<BinaryString name="AttributesSerialize"></BinaryString>
 						<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -3015,7 +3045,7 @@ return module
 ]]></ProtectedString>
 						<int64 name="SourceAssetId">-1</int64>
 						<BinaryString name="Tags"></BinaryString>
-						<UniqueId name="UniqueId">1c5af6af6d1a60b507288a6200000612</UniqueId>
+						<UniqueId name="UniqueId">590a0016c53e1d020729c36f00000612</UniqueId>
 					</Properties>
 				</Item>
 			</Item>
@@ -3044,7 +3074,8 @@ return module
 				<string name="Name">Server</string>
 				<token name="RunContext">0</token>
 				<string name="ScriptGuid">{460324D0-5B9B-4A09-A54A-1E8847BDA412}</string>
-				<ProtectedString name="Source">-- This file is temporary and used exclusively for testing Chapter.</ProtectedString>
+				<ProtectedString name="Source"><![CDATA[-- This file is temporary and used exclusively for testing Chapter.
+]]></ProtectedString>
 				<int64 name="SourceAssetId">-1</int64>
 				<BinaryString name="Tags"></BinaryString>
 				<UniqueId name="UniqueId">5f5c22cbbc3d3aa207274dd80000036c</UniqueId>
